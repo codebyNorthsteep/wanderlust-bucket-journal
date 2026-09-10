@@ -1,7 +1,11 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      charset="UTF-8"
+    />
     <title>Wanderlust Journal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -13,18 +17,18 @@
       </header>
       <nav>
         <div v-if="isLoggedIn">
-        <ul>
-          <li>
-            <a
-              href="https://www.getyourguide.com"
-              target="_blank"
-              title="This is a link to GetYourGuide"
-              >Explore</a
-            >
-          </li>
-          <li><a href="#my-list">My List</a></li>
-          <li><a href="#add">Add</a></li>
-        </ul>
+          <ul>
+            <li>
+              <a
+                href="https://www.getyourguide.com"
+                target="_blank"
+                title="This is a link to GetYourGuide"
+                >Explore</a
+              >
+            </li>
+            <li><a href="#my-list">My List</a></li>
+            <li><a href="#add">Add</a></li>
+          </ul>
         </div>
         <div class="login-logout">
           <button v-if="!usernameInput" @click="goToLogin">Log in</button>
@@ -58,6 +62,7 @@
               >Please log in to access your bucket list and start adding your
               adventures!</strong
             >
+          </p>
         </section>
 
         <section class="bucket-area" id="my-list" v-if="isLoggedIn">
