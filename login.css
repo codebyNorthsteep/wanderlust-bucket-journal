@@ -5,10 +5,10 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0;
-  min-height: 600px;
+  min-height: 900px;
 }
 .container {
-  max-width: 400px;
+  width: 300px;
   padding: 20px;
   background-color: var(--paper);
   border: 1px solid var(--line);
@@ -33,4 +33,17 @@ button {
 
 button:hover {
   background-color: var(--stamp-red);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+.container {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 500px;
+  }
+  
 }

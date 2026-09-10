@@ -148,7 +148,6 @@ createApp({
           user.password === this.passwordInput,
       );
       if (user) {
-        alert("Login successful!");
         localStorage.setItem("username", this.usernameInput);
         window.location.href = "index.html";
         this.isLoggedIn = true;
@@ -158,7 +157,6 @@ createApp({
     },
     logout() {
       localStorage.removeItem("username");
-      alert("You have been logged out.");
       window.location.href = "index.html";
       this.isLoggedIn = false;
     },
