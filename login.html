@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue - Introduktion</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="login.css" />
+  </head>
+  <body>
+    <section class="container" id="app">
+      <form v-on:submit.prevent="login">
+        <label for="username">Username:</label>
+        <input type="text" id="username" v-model="usernameInput" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" v-model="passwordInput" required />
+
+        <button type="submit">Log in</button>
+      </form>
+    </section>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

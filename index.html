@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wanderlust Journal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <section id="app" class="grid-container">
+      <header>
+        <h1>Wanderlust Journal</h1>
+      </header>
+      <nav>
+        <div v-if="isLoggedIn">
+        <ul>
+          <li>
+            <a
+              href="https://www.getyourguide.com"
+              target="_blank"
+              title="This is a link to GetYourGuide"
+              >Explore</a
+            >
+          </li>
+          <li><a href="#my-list">My List</a></li>
+          <li><a href="#add">Add</a></li>
+        </ul>
+        </div>
+        <div class="login-logout">
+          <button v-if="!usernameInput" @click="goToLogin">Log in</button>
+          <button v-else @click="logout">Log out</button>
+        </div>
+      </nav>
+
+      <main>
+        <section class="intro">
+          <h2>Welcome, {{ welcomeName }}! ✨</h2>
+          <p>
+            Turn your dreams into adventures and create your ultimate bucket
+            list. Save the places you've always wanted to visit and the
+            experiences you've always dreamed of having.
+          </p>
+          <p>
+            Add destinations, unforgettable experiences, and anything else you
+            don't want to miss. And track your progress as you check off
+            completed items via the status bar. Your bucket list is your
+            personal commitment to exploring the world and creating
+            unforgettable experiences.
+          </p>
+          <p v-if="isLoggedIn">
+            <strong
+              >Your next adventure starts here. Add your destination or
+              experience and start dreaming!</strong
+            >
+          </p>
+          <p v-else>
+            <strong
+              >Please log in to access your bucket list and start adding your
+              adventures!</strong
+            >
+        </section>
+
+        <section class="bucket-area" id="my-list" v-if="isLoggedIn">
+          <div>
+            <label>
+              <input v-model="filterMode" type="radio" value="all" />
+              Show All
+            </label>
+            <label>
+              <input v-model="filterMode" type="radio" value="experiences" />
+              Show Experiences
+            </label>
+            <label>
+              <input v-model="filterMode" type="radio" value="destinations" />
+              Show Destinations
+            </label>
+          </div>
+          <article
+            class="bucket-item"
+            v-for="item in visibleItems"
+            :key="item.id"
+            :class="[item.type.toLowerCase(), item.statusbar]"
+          >
+            <img
+              v-if="item.imageUrl"
+              :src="item.imageUrl"
+              :alt="'Image of ' + item.title"
+            />
+            <div class="bucket-item-content">
+              <h3>{{ item.title }}</h3>
+              <p><strong>Location:</strong> {{ item.location }}</p>
+              <p><strong>Type:</strong> {{ item.type }}</p>
+              <p><strong>Description:</strong> {{ item.description }}</p>
+
+              <div class="status-buttons">
+                <select
+                  v-model="item.statusbar"
+                  v-if="item.statusbar !== 'completed'"
+                >
+                  <option value="dreaming">Dreaming</option>
+                  <option value="planning">Planning</option>
+                  <option value="completed">Completed</option>
+                </select>
+
+                <p
+                  v-if="item.statusbar === 'completed'"
+                  class="completed-message"
+                >
+                  ✓ Completed!
+                </p>
+              </div>
+            </div>
+            <button class="delete-button" @click="deleteBucketItem(item.id)">
+              Delete
+            </button>
+          </article>
+        </section>
+
+        <section class="side-bar" v-if="isLoggedIn">
+          <div class="commitment">
+            <h3>Where Will Your Story Take You?</h3>
+            <p>
+              This is your personal commitment to exploring the world and
+              creating unforgettable experiences.
+            </p>
+            <p>
+              Your bucket list is more than a wishlist; it's a commitment to
+              wander, explore, and collect memories over things. Start charting
+              your next path below. By adding items to your bucket list, you are
+              committing to making these dreams a reality.
+            </p>
+          </div>
+
+          <section class="add-item" id="add">
+            <h3>Add a New Bucketlist Item</h3>
+            <form class="add-item-form" v-on:submit.prevent="addBucketItem">
+              <input
+                v-model="newItemTitle"
+                type="text"
+                placeholder="Title..."
+                required
+              />
+              <input
+                v-model="newItemLocation"
+                type="text"
+                placeholder="Location..."
+                required
+              />
+              <fieldset>
+                <legend>Select type:</legend>
+                <div>
+                  <input
+                    v-model="newItemType"
+                    type="radio"
+                    id="experience"
+                    name="type"
+                    value="experience"
+                    required
+                  />
+                  <label for="experience">Experience</label>
+                </div>
+
+                <div>
+                  <input
+                    v-model="newItemType"
+                    type="radio"
+                    id="destination"
+                    name="type"
+                    value="destination"
+                    required
+                  />
+                  <label for="destination">Destination</label>
+                </div>
+              </fieldset>
+
+              <input
+                v-model="newItemDescription"
+                type="text"
+                placeholder="Description..."
+              />
+              <input
+                v-model="newItemImageUrl"
+                type="text"
+                placeholder="Image URL..."
+              />
+              <button type="submit">Add</button>
+            </form>
+          </section>
+          <section class="show-quantity">
+            <h3>Current Bucket List Quantity</h3>
+            <p>Total items: {{ bucketItems.length }}</p>
+            <p>Experiences: {{ experiencesCount }}</p>
+            <p>Destinations: {{ destinationsCount }}</p>
+            <p>Completed: {{ completedCount }}</p>
+          </section>
+          <section class="logo">
+            <img src="images/navigation.png" alt="Wanderlust Journal Logo" />
+          </section>
+        </section>
+      </main>
+
+      <footer>
+        <p>&copy; 2026 Wanderlust Journal. All rights reserved.</p>
+      </footer>
+    </section>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

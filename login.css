@@ -1,0 +1,36 @@
+body {
+  background: #c0a483;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  min-height: 600px;
+}
+.container {
+  max-width: 400px;
+  padding: 20px;
+  background-color: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow:
+    0 0 0 6px var(--charcoal),
+    0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  background-color: var(--charcoal);
+  color: var(--paper);
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--stamp-red);
+}
