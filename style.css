@@ -100,6 +100,10 @@ nav a:hover {
   border-color: var(--stamp-red);
 }
 
+.login-logout {
+  margin-left: auto;
+}
+
 .login-logout button {
   padding: 5px 10px;
   background-color: var(--ink);
@@ -116,6 +120,9 @@ nav a:hover {
 
 main {
   grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
   padding: 20px 48px 48px;
 }
 
@@ -335,8 +342,6 @@ footer {
   }
 
   main {
-    display: flex;
-    flex-direction: column;
     gap: 30px;
     align-items: start;
   }
@@ -376,7 +381,7 @@ footer {
   }
 
   main {
-    display: grid;
+   
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     align-items: start;
