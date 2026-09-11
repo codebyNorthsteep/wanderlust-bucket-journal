@@ -1,17 +1,13 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-      charset="UTF-8"
-    />
-    <title>Wanderlust Journal</title>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wanderlust Journal</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <section id="app" class="grid-container">
+    <div id="app" class="grid-container">
       <header>
         <h1>Wanderlust Journal</h1>
       </header>
@@ -98,6 +94,7 @@
               <p><strong>Description:</strong> {{ item.description }}</p>
 
               <div class="status-buttons">
+                <label for="status">Change Status:  </label>
                 <select
                   v-model="item.statusbar"
                   v-if="item.statusbar !== 'completed'"
@@ -121,7 +118,7 @@
           </article>
         </section>
 
-        <section class="side-bar" v-if="isLoggedIn">
+        <aside class="side-bar" v-if="isLoggedIn">
           <div class="commitment">
             <h3>Where Will Your Story Take You?</h3>
             <p>
@@ -139,16 +136,20 @@
           <section class="add-item" id="add">
             <h3>Add a New Bucketlist Item</h3>
             <form class="add-item-form" v-on:submit.prevent="addBucketItem">
+              <label for="title">Title:</label>
               <input
                 v-model="newItemTitle"
                 type="text"
                 placeholder="Title..."
+                id="title"
                 required
               />
+              <label for="location">Location:</label>
               <input
                 v-model="newItemLocation"
                 type="text"
                 placeholder="Location..."
+                id="location"
                 required
               />
               <fieldset>
@@ -178,14 +179,18 @@
                 </div>
               </fieldset>
 
+              <label for="description">Description:</label>
               <input
                 v-model="newItemDescription"
                 type="text"
+                id="description"
                 placeholder="Description..."
               />
+              <label for="image">Image URL:</label>
               <input
                 v-model="newItemImageUrl"
                 type="text"
+                id="image"
                 placeholder="Image URL..."
               />
               <button type="submit">Add</button>
@@ -198,16 +203,16 @@
             <p>Destinations: {{ destinationsCount }}</p>
             <p>Completed: {{ completedCount }}</p>
           </section>
-          <section class="logo">
+          <figure class="logo">
             <img src="images/navigation.png" alt="Wanderlust Journal Logo" />
-          </section>
-        </section>
+          </figure>
+        </aside>
       </main>
 
       <footer>
         <p>&copy; 2026 Wanderlust Journal. All rights reserved.</p>
       </footer>
-    </section>
+    </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="app.js"></script>
   </body>
